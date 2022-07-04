@@ -10,6 +10,6 @@ COPY ./ /app
 
 ENV DJANGO_SECRET_KEY 123
 
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 
 CMD ["run"]
