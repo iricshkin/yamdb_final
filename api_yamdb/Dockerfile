@@ -4,8 +4,12 @@ WORKDIR /app
 
 COPY requirements.txt .
 
-RUN pip3 install -r ./requirements.txt --no-cache-dir
+RUN pip install --upgrade pip && pip3 install -r ./requirements.txt --no-cache-dir
 
 COPY ./ /app
 
-CMD ["gunicorn", "api_yamdb.wsgi:application", "--bind", "0:8000"]
+ENV DJANGO_SECRET_KEY 123
+
+ENTRYPOINT ["/app/entrypoint.sh"]
+
+CMD ["run"]

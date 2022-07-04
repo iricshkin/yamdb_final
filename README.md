@@ -74,6 +74,28 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
+## Запуск проекта
+
+Перейдите в папку проекта и выполните команду:
+
+```
+docker-compose up -d --build
+```
+
+При первом запуске для функционирования проекта выполните команды:
+
+```
+docker-compose exec web python manage.py migrate
+docker-compose exec web python manage.py createsuperuser
+docker-compose exec web python manage.py collectstatic --no-input
+```
+
+Заполните базу начальными данными
+
+```
+docker-compose exec web python manage.py loaddata fixtures.json
+```
+
 ## Как пользоваться
 
 После запуска проекта, подробную инструкцию можно будет посмотреть по адресу http://127.0.0.1:8000/redoc/
