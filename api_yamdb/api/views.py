@@ -1,4 +1,3 @@
-from api_yamdb.settings import EMAIL_FROM
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.core.mail import send_mail
 from django.db import IntegrityError
@@ -7,25 +6,20 @@ from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, status, viewsets
 from rest_framework.decorators import action
+from rest_framework.paginator import LimitOffsetPagination
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
 from rest_framework.mixins import (
     CreateModelMixin,
     DestroyModelMixin,
     ListModelMixin,
 )
-from rest_framework.pagination import LimitOffsetPagination
-from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from reviews.models import Categories, Genres, Review, Title, User
 
+from api_yamdb.settings import EMAIL_FROM
 
-from .filters import TitleFilter
-from .permissions import (
-    AdminOnly,
-    IsAdminModeratorOwnerOrReadOnly,
-    IsAdminOrReadOnly,
-)
 from .serializers import (
     CategoriesSerializer,
     CommentsSerializer,
@@ -38,6 +32,12 @@ from .serializers import (
     UserNotAdminSerializer,
     UserSerializer,
 )
+from .permissions import (
+    AdminOnly,
+    IsAdminModeratorOwnerOrReadOnly,
+    IsAdminOrReadOnly,
+)
+from .filters import TitleFilter
 
 
 class CreateListDestroyViewSet(
