@@ -10,6 +10,9 @@ COPY ./ /app
 
 ENV DJANGO_SECRET_KEY 123
 
+ADD entrypoint.sh /entrypoint.sh
+RUN chmod a+x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 # ENTRYPOINT ["/app/entrypoint.sh"]
 
 CMD ["run"]
