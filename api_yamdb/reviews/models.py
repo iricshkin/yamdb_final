@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import (
     MaxValueValidator,
     MinValueValidator,
-    RegexValidator
+    RegexValidator,
 )
 from django.db import models
 
@@ -18,7 +18,7 @@ class UserRole(Enum):
 
     @classmethod
     def choices(cls):
-        return(tuple((i.name, i.value) for i in cls))
+        return tuple((i.name, i.value) for i in cls)
 
 
 def username_not_me(value):
@@ -31,18 +31,14 @@ class User(AbstractUser):
     username = models.CharField(
         max_length=150,
         unique=True,
-        validators=[RegexValidator(
-            regex=r'^[\w.@+-+\\z]'
-        ), username_not_me]
+        validators=[RegexValidator(regex=r'^[\w.@+-+\\z]'), username_not_me],
     )
     first_mane = models.CharField(max_length=150, blank=True, null=True)
     last_name = models.CharField(max_length=150, blank=True, null=True)
     email = models.EmailField(max_length=254, unique=True)
     bio = models.TextField(blank=True)
     role = models.CharField(
-        max_length=99,
-        choices=UserRole.choices(),
-        default=UserRole.user.value
+        max_length=99, choices=UserRole.choices(), default=UserRole.user.value
     )
     confirmation_code = models.CharField(
         max_length=254, default='XXXX', null=True

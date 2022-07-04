@@ -1,10 +1,8 @@
+from django.core.validators import RegexValidator
 from django.forms import ValidationError
-
 from rest_framework import serializers
 from rest_framework.generics import get_object_or_404
-from django.core.validators import RegexValidator
-
-from reviews.models import Comments, Review, Title, User, Categories, Genres
+from reviews.models import Categories, Comments, Genres, Review, Title, User
 
 
 class SendEmailSerializer(serializers.Serializer):
@@ -14,9 +12,7 @@ class SendEmailSerializer(serializers.Serializer):
     username = serializers.CharField(
         required=True,
         max_length=150,
-        validators=[RegexValidator(
-            regex=r'^[\w.@+-+\\z]'
-        )]
+        validators=[RegexValidator(regex=r'^[\w.@+-+\\z]')],
     )
 
     class Meta:
@@ -35,9 +31,7 @@ class SendTokenSerializer(serializers.Serializer):
     username = serializers.CharField(
         required=True,
         max_length=150,
-        validators=[RegexValidator(
-            regex=r'^[\w.@+-+\\z]'
-        )]
+        validators=[RegexValidator(regex=r'^[\w.@+-+\\z]')],
     )
 
     confirmation_code = serializers.CharField(required=True)

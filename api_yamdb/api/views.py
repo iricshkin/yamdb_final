@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 from django.db.models import Avg
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import status, viewsets, filters
+from rest_framework import filters, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
@@ -17,7 +17,7 @@ from rest_framework.mixins import (
     ListModelMixin,
 )
 
-from reviews.models import Review, Title, User, Categories, Genres
+from reviews.models import Categories, Genres, Review, Title, User
 from api_yamdb.settings import EMAIL_FROM
 from .permissions import (
     AdminOnly,
@@ -82,6 +82,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class Registration(APIView):
     """Первый этап регистрации"""
+
     permission_classes = [AllowAny]
     pagination_class = LimitOffsetPagination
 
@@ -97,9 +98,7 @@ class Registration(APIView):
             )[0]
         except IntegrityError as ex:
             if 'UNIQUE constraint failed: reviews_user.username' in ex.args:
-                return Response(
-                    'username занят', status.HTTP_400_BAD_REQUEST
-                )
+                return Response('username занят', status.HTTP_400_BAD_REQUEST)
 
             return Response('Email занят', status.HTTP_400_BAD_REQUEST)
         confirmation_code = PasswordResetTokenGenerator().make_token(user)
@@ -115,6 +114,7 @@ class Registration(APIView):
 
 class SendToken(APIView):
     """Второй этап регистрации"""
+
     permission_classes = [AllowAny]
     pagination_class = LimitOffsetPagination
 
@@ -129,12 +129,16 @@ class SendToken(APIView):
                 username=username,
             )
         except User.DoesNotExist:
-            return Response('Ошибка в username',
-                            status=status.HTTP_404_NOT_FOUND)
-        if not PasswordResetTokenGenerator().check_token(user,
-                                                         confirmation_code):
-            return Response('Неверный код подтверждения',
-                            status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                'Ошибка в username', status=status.HTTP_404_NOT_FOUND
+            )
+        if not PasswordResetTokenGenerator().check_token(
+            user, confirmation_code
+        ):
+            return Response(
+                'Неверный код подтверждения',
+                status=status.HTTP_400_BAD_REQUEST,
+            )
         token = RefreshToken.for_user(user).access_token
         user.is_active = True
         user.save()
@@ -178,6 +182,7 @@ class CommentsViewSet(viewsets.ModelViewSet):
 
 class BaseCaregoriesGenresViewSet(CreateListDestroyViewSet):
     """Класс общих параметров для Жанров и Категорий"""
+
     permission_classes = (IsAdminOrReadOnly,)
     filter_backends = (filters.SearchFilter,)
     pagination_class = LimitOffsetPagination
