@@ -2,8 +2,8 @@ from enum import Enum
 
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import (
-    MaxValueValidator,
     MinValueValidator,
+    MaxValueValidator,
     RegexValidator,
 )
 from django.db import models
