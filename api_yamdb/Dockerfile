@@ -10,7 +10,7 @@ COPY ./ /app
 
 ENV DJANGO_SECRET_KEY 123
 
-# ENTRYPOINT ["/app/entrypoint.sh"]
-CMD ["gunicorn", "api_yamdb.wsgi:application", "--bind", "0:8000"]
+ENTRYPOINT ["/app/entrypoint.sh"]
+# CMD ["gunicorn", "api_yamdb.wsgi:application", "--bind", "0:8000"]
 
-# CMD ["run"]
+CMD ["run"]

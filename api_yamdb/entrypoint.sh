@@ -7,8 +7,6 @@ if [ -z "$1" ]
 elif [ $1 = "migrate" ]
   then
       python manage.py migrate
-      python manage.py load_users_data
-      python manage.py load_all_data
 elif [ $1 = "pre-run" ]
   then
       python manage.py collectstatic --noinput
