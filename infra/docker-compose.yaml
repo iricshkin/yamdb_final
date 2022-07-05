@@ -19,7 +19,6 @@ services:
     image: iricshkin/yamdb_final:latest
     volumes:
       - static_value:/app/static/:rw
-      - media_value:/app/madia/:rw
     env_file:
       - ./.env
     command:
