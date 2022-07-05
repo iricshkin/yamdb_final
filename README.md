@@ -96,6 +96,8 @@ docker-compose exec web python manage.py collectstatic --no-input
 docker-compose exec web python manage.py loaddata fixtures.json
 ```
 
+## Деплой на удаленный сервер
+
 ## Как пользоваться
 
 После запуска проекта, подробную инструкцию можно будет посмотреть по адресу http://51.250.105.138/redoc/
