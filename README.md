@@ -2,6 +2,8 @@
 
 ![example workflow](https://github.com/iricshkin/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 
+Документация доступна по адресу: http://51.250.105.138:8080/redoc/
+
 ## REST API для сервиса YaMDb — базы отзывов о фильмах, книгах и музыке.
 
 версия с Docker, Continuous Integration на GitHub Actions
@@ -118,7 +120,3 @@ TELEGRAM_TOKEN # Токен бота (для оправки уведомлени
 - сборка и обновление образа на сервисе docker-hub
 - автоматический деплой на сервер, указанный в secrets
 - отправка уведомления в телеграм
-
-## Как пользоваться
-
-После запуска проекта, подробную инструкцию можно будет посмотреть по адресу http://51.250.105.138/redoc/
