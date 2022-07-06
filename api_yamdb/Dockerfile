@@ -14,4 +14,4 @@ RUN chmod +x /app/entrypoint.sh
 
 ENTRYPOINT ["/app/entrypoint.sh"]
 
-CMD ["run"]
+CMD ["gunicorn", "api_yamdb.wsgi:application", "--bind", "0:8000"]
