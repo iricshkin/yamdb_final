@@ -5,6 +5,7 @@ if [ -z "$1" ]
     exit 1
 elif [ $1 = "migrate" ]
   then
+      python manage.py makemigrations
       python manage.py migrate
 elif [ $1 = "pre-run" ]
   then
