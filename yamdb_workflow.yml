@@ -68,7 +68,8 @@ jobs:
             echo DB_HOST=${{ secrets.DB_HOST }} >> .env
             echo DB_PORT=${{ secrets.DB_PORT }} >> .env
             sudo docker image pull iricshkin/yamdb_final:latest
-            sudo docker-compose up --force-recreate -d  
+            sudo docker-compose up --force-recreate -d 
+
 
   send_message:
     runs-on: ubuntu-latest
