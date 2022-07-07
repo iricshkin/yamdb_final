@@ -16,6 +16,7 @@ elif [ $1 = "run" ]
     exit $?
 elif [ $1 = "all" ]
   then
+      python manage.py makemigrations
       python manage.py migrate
     exec $(which gunicorn) api_yamdb.wsgi:application --bind=0:8080
     exit $?
