@@ -2,7 +2,6 @@
 
 ![example workflow](https://github.com/iricshkin/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 
-Документация доступна по адресу: http://51.250.105.138/redoc/
 
 ## REST API для сервиса YaMDb — базы отзывов о фильмах, книгах и музыке.
 
